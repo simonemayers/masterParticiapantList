@@ -48,12 +48,12 @@ export function addStudentMentorButton(student, students) {
 
 		let mentorPopUp = document.querySelector(".add-mentor-pop-up");
 		let exitButton = mentorPopUp.querySelector(".exit-pop-up-button");
-		exitButton.addEventListener("click", deleteAddStudentMentorPopUp);
+		exitButton.addEventListener("click", deleteAddMentorPopUp);
 
 		let submitButton = document.querySelector(".add-mentor-button");
 		submitButton.addEventListener("click", () => {
 			currentStudent.addMentor(document.querySelector("#new-mentor-name").value);
-			deleteAddStudentMentorPopUp();
+			deleteAddMentorPopUp();
 		}, { once: true })
 	})
 	return mentorButton;
@@ -307,3 +307,6 @@ export function toggleNumberOfTardies(){
 }
 // tardiesDropDown.addEventListener("change", (e) => {
 // });
+
+
+

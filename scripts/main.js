@@ -41,3 +41,4 @@ submitButton.addEventListener("click", (e) => {
 
 absensesDropDown.addEventListener("change", (e) => toggleNumberOfAbsenses);
 tardiesDropDown.addEventListener("change", (e) => toggleNumberOfTardies);
+console.log("working")

@@ -1,3 +1,4 @@
+import { students } from "../main.js"
 export class Student {
 	constructor(userName, firstName, lastName, absenses, tardies, capstoneProject, notes) {
 		this.userName = userName;

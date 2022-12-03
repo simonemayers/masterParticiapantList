@@ -6,10 +6,16 @@ export class Capstone {
 		capstoneProjects.push(this);
 		this.id = capstoneProjects.length;
 	}
-	changeTitle(title) {
+	setTitle(title) {
 		this.title = title;
 	}
-	changeGroup(isGroup) {
+	setIsGroup(isGroup) {
 		this.isGroup = isGroup;
+	}
+	getTitle(){
+		return this.title
+	}
+	get isGroup(){
+		return this.isGroup;
 	}
 }

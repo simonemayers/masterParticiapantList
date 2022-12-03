@@ -181,27 +181,32 @@ function addStudentActions(student){
     return actionTd;
 }
 
-function addStudentMentorButton(student){
-    let button = document.createElement("button")
-    button.classList.add("btn")
-    button.classList.add("mentor-btn")
-    button.innerHTML = '<i class="bi bi-person-plus-fill"></i>'
-    let mentorName;
-    let i;
+function createStudentMentorButton() {
+	let button = document.createElement("button");
+	button.classList.add("btn");
+	button.classList.add("mentor-btn");
+	button.innerHTML = '<i class="bi bi-person-plus-fill"></i>';
+    return button;
+}
 
-    button.addEventListener("click", (e) => {
-        i = e.target.parentElement.parentElement.parentElement.querySelector(".id").textContent
+function addStudentMentorButton(){
+    let mentorButton = createStudentMentorButton();
+    let i, currentStudent, mentorName
+
+    mentorButton.addEventListener("click", (e) => {
+        i = parseInt(e.target.closest("tr").children[0].textContent);
+        currentStudent = students.find((student) => student.id === i);
+        mentorName = currentStudent.getMentor();
         showAddMentorPopUp()
-            console.log(i)
-            console.log(students[i])
-            if(students[i].getMentor()){
-                mentorName = students[i].getMentor();
-                document.querySelector("#new-mentor-name").value = mentorName
-                console.log("has mentor")
-            } else{
-                console.log("does not have mentor")
-            }
-        // }
+
+        console.log(currentStudent)
+
+        if(mentorName){
+            document.querySelector("#new-mentor-name").value = mentorName
+            console.log("has mentor")
+        } else{
+            console.log("does not have mentor")
+        }
     })
 
     document.querySelector("#new-mentor-name").addEventListener("change", (e) => {
@@ -214,10 +219,10 @@ function addStudentMentorButton(student){
 
     let submitButton = document.querySelector(".add-mentor-button")
     submitButton.addEventListener("click", (e) =>{
-        students[i].addMentor(mentorName)
+        currentStudent.addMentor(mentorName)
         removeAddMentorPopUp()
     })
-    return button
+    return mentorButton
 }
 
 function showNewParticipantPopUp(){
@@ -241,7 +246,7 @@ function createNewStudent(){
     let tardiesTd = addStudentTardies(student)
     let notesTd = addStudentNotes(student)
     let actionTd = addStudentActions(student)
-    let mentorButton = addStudentMentorButton(student)
+    let mentorButton = addStudentMentorButton()
     newRow.id = `student${idTd.textContent}`;
     newRow.appendChild(idTd)
     newRow.appendChild(nameTd)

@@ -1,73 +1,67 @@
 // Imports of the classes and functions
-import { showAddMentorPopUp, removeAddMentorPopUp } from "./add-mentor.js";
+import { renderAddMentorPopUp, deleteAddMentorPopUp } from "../controller/add-mentor-popup.js";
+
+import { renderAddCapstonePopUp, deleteAddCapstonePopUp } from "../controller/add-capstone-popup.js";
+
+import { showAddAbsensePopUp, hideAddAbsensePopUp } from "../controller/add-absense-popup.js";
 
 
-function createStudentMentorButton() {
-	let button = document.createElement("button");
-	button.classList.add("btn");
-	button.classList.add("mentor-btn");
-	button.innerHTML = '<i class="bi bi-person-plus-fill"></i>';
-    return button;
+import { showAddElectivePopUp, hideAddElectivePopUp } from "../controller/add-elective-popup.js";
+
+
+import { showAddNotePopUp, hideAddNotePopUp } from "../controller/add-note-popup.js";
+
+import { showAddTardyPopUp, hideAddTardyPopUp } from "../controller/add-tardy-popup.js";
+
+import { showNewParticipantPopUp, hideNewParticipantPopUp } from "../controller/new-participant-popup.js";
+
+import { renderNewStudent } from "../controller/student-controller.js"
+import { Student } from "../model/Student.js"
+
+import { renderStudentMentorButton } from "../controller/add-student-action-buttons.js";
+import { c } from "docker/src/languages.js";
+
+
+
+
+function findCurrentStudent(e, students){
+	return students[parseInt(e.target.closest("tr").children[0].textContent)]
+}
+
+function handleMentorButtonClick(currentStudent){
+	let mentorName = currentStudent.getMentor();
+	renderAddMentorPopUp()
+
+	if (mentorName) {
+		document.querySelector("#new-mentor-name").value = mentorName;
+		document.querySelector("#new-mentor-name").placeholder = "";
+	} else {
+		document.querySelector("#new-mentor-name").placeholder = "Not assigned";
+	}
+};
+
+export function addStudentMentorButton(student, students) {
+	let mentorButton = document.querySelector(`.mentor-btn-${student.id}`)
+	mentorButton.addEventListener("click", (e) => {
+		let currentStudent = findCurrentStudent(e, students)
+		handleMentorButtonClick(currentStudent)
+
+		let mentorPopUp = document.querySelector(".add-mentor-pop-up");
+		let exitButton = mentorPopUp.querySelector(".exit-pop-up-button");
+		exitButton.addEventListener("click", deleteAddStudentMentorPopUp);
+
+		let submitButton = document.querySelector(".add-mentor-button");
+		submitButton.addEventListener("click", () => {
+			currentStudent.addMentor(document.querySelector("#new-mentor-name").value);
+			deleteAddStudentMentorPopUp();
+		}, { once: true })
+	})
+	return mentorButton;
 }
 
 
-function addStudentMentorButton(student) {
-	
-	// Added to separate concerns, returns a button element
-    // and references the button as variable.
-	let mentorButton = createStudentMentorButton();
-	let mentorName;
-    // You should make this more descriptive, when using else where, its easy
-    // to forget what the else is for.
-	let i;
-
-	// i = parseInt(e.target.parentElement.parentElement.parentElement.querySelector(".id").textContent);
-	// i = parseInt(e.target.closest("tr").children[0].textContent);
-
-	const currentStudent = students.find((student) => student.id === i);
-
-
-	mentorButton.addEventListener("click", (e) => {
-		showAddMentorPopUp();
-
-        console.log(student);
-		console.log(students[student]);
-
-        // Found the main issue, you are always referencing the newest student, not the student that you need to be referencing.
-        // You can use state to help deal with this. There are two main ways to deal with state in your application without a framework.
-        // You can have everything exist in the class and use OOP, or you can have everything as variables and deal with 
-        // state in one place. I would recommend the latter, but it is up to you. Thats' why ppl recommend using a framework.
-  
-		if (students[i].getMentor()) {
-			mentorName = students[i].getMentor();
-			document.querySelector("#new-mentor-name").value = mentorName;
-			console.log("has mentor");
-		} else {
-			console.log("does not have mentor");
-		}
-
-	});
-
-	document.querySelector("#new-mentor-name").addEventListener("change", (e) => {
-		mentorName = document.querySelector("#new-mentor-name").value;
-	});
-
-	mentorPopUp = document.querySelector(".add-mentor-pop-up");
-	let exitButton = mentorPopUp.querySelector(".exit-pop-up-button");
-	exitButton.addEventListener("click", removeAddMentorPopUp);
-
-	let submitButton = document.querySelector(".add-mentor-button");
-	submitButton.addEventListener("click", (e) => {
-		students[i].addMentor(mentorName);
-		removeAddMentorPopUp();
-	});
-	return button;
-} 
-
-
-
 var show = true;
-function showCheckboxes() {
+export function showCheckboxes() {
 	var checkboxes = document.getElementById("checkBoxes");
 
 	if (show) {
@@ -79,7 +73,7 @@ function showCheckboxes() {
 	}
 }
 
-function isUserNameUnique(user) {
+function isUserNameUnique(user, students) {
 	let userNames = [];
 	let answer;
 	if (students.length != 0) {
@@ -95,55 +89,51 @@ function isUserNameUnique(user) {
 	return answer;
 }
 
-let newParticipantButton = document.querySelector("#add-new-participant");
-let exitButton = document.querySelector(".exit-pop-up-button");
-let submitButton = document.querySelector(".new-participant-button");
+// export let newParticipantButton = document.querySelector("#add-new-participant");
+// export let exitButton = document.querySelector(".exit-pop-up-button");
+// export let submitButton = document.querySelector(".new-participant-button");
 let userNameN = 1;
 
-newParticipantButton.addEventListener("click", showNewParticipantPopUp);
-exitButton.addEventListener("click", removeNewParticipantPopUp);
+// newParticipantButton.addEventListener("click", showNewParticipantPopUp);
+// exitButton.addEventListener("click", hideNewParticipantPopUp);
 
 
-function addStudentCapstoneButton() {
-	let capstoneButtons = document.querySelectorAll(".capstone-btn");
-	capstoneButtons.forEach((capstoneButton) => {
-		let i = capstoneButton.parentElement.parentElement.querySelector(".id").textContent;
-		let capstoneName = "";
-		let isGroup = true;
-		if (students[i].capstoneProject) {
-			capstoneName = students[i].capstoneProject.title;
-			isGroup = students[i].capstoneProject.isGroup;
-		}
-		capstoneButton.addEventListener("click", (e) => {
-			showAddCapstonePopUp();
-			document.querySelector("#new-capstone-name").value = capstoneName;
-			if (isGroup) {
-				document.querySelector("#new-structure").selectedIndex = 0;
-			} else {
-				document.querySelector("#new-structure").selectedIndex = 1;
-			}
-		});
-		document.querySelector("#new-capstone-name").addEventListener("change", (e) => {
-			capstoneName = document.querySelector("#new-capstone-name").value;
-		});
-		document.querySelector("#new-structure").addEventListener("change", (e) => {
-			isGroup = document.querySelector("#new-structure")[document.querySelector("#new-structure").selectedIndex].value == "true";
-		});
-		capstonePopUp = document.querySelector(".add-capstone-pop-up");
-		let exitButton = capstonePopUp.querySelector(".exit-pop-up-button");
-		exitButton.addEventListener("click", removeAddCapstonePopUp);
+// function findCurrentStudent(e, students){
+// 	return students[parseInt(e.target.closest("tr").children[0].textContent)]
+// }
+
+function handleCapstoneButtonClick(currentStudent){
+	console.log(currentStudent.getCapstone())
+	// let capstoneTitle = currentStudent.getCapstone().getTitle()
+	// let isGroup = currentStudent.getCapstone().getIsGroup()
+	renderAddCapstonePopUp()
+
+	if (currentStudent.getCapstone()) {
+		document.querySelector("#new-capstone-name").value = currentStudent.getCapstone().getTitle();
+		document.querySelector("#new-capstone-name").placeholder = "";
+		document.querySelector("#new-structure").value = currentStudent.getCapstone().getIsGroup()
+	} else {
+		document.querySelector("#new-capstone-name").placeholder = "Not assigned";
+		document.querySelector("#new-structure").value = "Not Assigned"
+	}
+};
+
+export function addStudentCapstoneButton(student, students) {
+	let capstoneButton = document.querySelector(`.capstone-btn-${student.id}`);
+	capstoneButton.addEventListener("click", (e) => {
+		let currentStudent = findCurrentStudent(e, students)
+		handleCapstoneButtonClick(currentStudent)
+
 		let submitButton = document.querySelector(".add-capstone-button");
-
 		submitButton.addEventListener("click", (e) => {
-			students[i].addCapstone(capstoneName, isGroup);
-			removeAddCapstonePopUp();
+			console.log("submitted")
 		});
 	});
 }
 
 
 
-function addStudentElectiveButton() {
+export function addStudentElectiveButton() {
 	let electiveButtons = document.querySelectorAll(".elective-btn");
 	electiveButtons.forEach((electiveButton) => {
 		let i = electiveButton.parentElement.parentElement.querySelector(".id").textContent;
@@ -174,7 +164,7 @@ function addStudentElectiveButton() {
 }
 
 
-function addStudentTardyButton() {
+export function addStudentTardyButton() {
 	let tardyButtons = document.querySelectorAll(".tardy-btn");
 	tardyButtons.forEach((tardyButton) => {
 		let i = tardyButton.parentElement.parentElement.querySelector(".id").textContent;
@@ -198,7 +188,7 @@ function addStudentTardyButton() {
 }
 
 
-function addStudentAbsenseButton() {
+export function addStudentAbsenseButton() {
 	let absenseButtons = document.querySelectorAll(".absense-btn");
 	absenseButtons.forEach((absenseButton) => {
 		let i = absenseButton.parentElement.parentElement.querySelector(".id").textContent;
@@ -220,7 +210,7 @@ function addStudentAbsenseButton() {
 	});
 }
 
-function addStudentNoteButton() {
+export function addStudentNoteButton() {
 	let noteButtons = document.querySelectorAll(".note-btn");
 	noteButtons.forEach((noteButton) => {
 		let i = noteButton.parentElement.parentElement.querySelector(".id").textContent;
@@ -255,32 +245,40 @@ function addStudentNoteButton() {
 	});
 }
 
-submitButton.addEventListener("click", (e) => {
+export function takeNewParticipantInput(students){
 	let newFirstName = document.querySelector("#new-first-name").value;
 	let newLastName = document.querySelector("#new-last-name").value;
 	let newCohort = document.querySelector("#new-cohort").value;
 	let newCity = document.querySelector("#new-city").value;
 	let userName = `${newFirstName.toLowerCase()}${newLastName.toLowerCase()}`;
-	let newStudent = new Student(userName, newFirstName, newLastName);
-	if (!isUserNameUnique(userName)) {
+	if (!isUserNameUnique(userName, students)) {
 		userNameN++;
 		userName += userNameN;
 	}
-	createNewStudent();
+	let newStudent = new Student(userName, newFirstName, newLastName);
 	newStudent.addCity(newCity);
 	newStudent.addCohort(newCohort);
-	removeNewParticipantPopUp();
+	return newStudent;
+}
 
-	addStudentCapstoneButton();
-	// addStudentMentorButton()
-	addStudentElectiveButton();
-	addStudentTardyButton();
-	addStudentAbsenseButton();
-	addStudentNoteButton();
-});
+// submitButton.addEventListener("click", (e) => {
+// 	let newStudent = takeNewParticipantInput()
+// 	renderNewStudent();
+// 	newStudent.addCity(newCity);
+// 	newStudent.addCohort(newCohort);
 
-let absensesDropDown = document.querySelector("#absenses");
-absensesDropDown.addEventListener("change", (e) => {
+// 	removeNewParticipantPopUp();
+// 	addStudentCapstoneButton();
+// 	addStudentMentorButton()
+// 	addStudentElectiveButton();
+// 	addStudentTardyButton();
+// 	addStudentAbsenseButton();
+// 	addStudentNoteButton();
+// });
+
+// let absensesDropDown = document.querySelector("#absenses");
+
+export function toggleNumberOfAbsenses(){
 	let selectedAbsenses = e.target[e.target.selectedIndex].value;
 	students.forEach((student) => {
 		if (student.getAbsenses() == selectedAbsenses) {
@@ -289,10 +287,14 @@ absensesDropDown.addEventListener("change", (e) => {
 			document.querySelector(`#student${student.id}`).style.display = "none";
 		}
 	});
-});
 
-let tardiesDropDown = document.querySelector("#tardies");
-tardiesDropDown.addEventListener("change", (e) => {
+}
+// absensesDropDown.addEventListener("change", (e) => {
+// });
+
+// let tardiesDropDown = document.querySelector("#tardies");
+
+export function toggleNumberOfTardies(){
 	let selectedTardies = e.target[e.target.selectedIndex].value;
 	students.forEach((student) => {
 		if (student.getTardies() == selectedTardies) {
@@ -301,4 +303,7 @@ tardiesDropDown.addEventListener("change", (e) => {
 			document.querySelector(`#student${student.id}`).style.display = "none";
 		}
 	});
-});
+
+}
+// tardiesDropDown.addEventListener("change", (e) => {
+// });

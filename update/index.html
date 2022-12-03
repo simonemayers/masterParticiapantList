@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    
+
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
@@ -34,11 +34,11 @@
                 </div>
             </div>
         </nav>
-    
+
         <h1 class="title">Mater Participant List</h1>
         <div class="input-group filter">
             <div class="multipleSelection">
-                <div class="selectBox" onclick="showCheckboxes()">
+                <div class="selectBox">
                     <select class="form-select" id="floatingSelect">
                         <option selected disabled>Additional Filters</option>
                     </select>
@@ -67,7 +67,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <select name="absenses" id="absenses" class="form-select m-5">
                 <option value="" disabled selected>Absenses</option>
                 <option value="0">0</option>
@@ -82,7 +82,7 @@
                 <option value="9">9</option>
                 <option value="10">10</option>
             </select>
-    
+
             <select name="tardies" id="tardies" class="form-select m-5">
                 <option value="" disabled selected>Tardies</option>
                 <option value="0">0</option>
@@ -97,7 +97,7 @@
                 <option value="9">9</option>
                 <option value="10">10</option>
             </select>
-    
+
             <select name="cities" id="cities" class="form-select m-5">
                 <option value="" disabled selected>Cities</option>
                 <option value="charlotte">Charlotte, NC</option>
@@ -108,14 +108,14 @@
                 <option value="dallas">Dallas, TX</option>
                 <option value="atlanta">Atlanta, GA</option>
             </select>
-    
+
             <select name="cohorts" id="cohorts" class="form-select m-5">
                 <option value="" disabled >Cohort</option>
                 <option value="c5" selected>Cohort 5</option>
                 <option value="c4">Cohort 4</option>
             </select>
         </div>
-    
+
         <table class="participant-list table">
             <thead>
                 <tr>
@@ -143,7 +143,7 @@
                         <button class="note-btn btn" title="note"><i class="bi bi-journal-text"></i></button>
                     </td>
                 </tr> -->
-        
+
             </tbody>
         </table>
 
@@ -160,8 +160,8 @@
                     <label for="new-last-name" class="input-group-text">Last Name</label>
                     <input id="new-last-name" class="form-control">
                 </div>
-                
-                
+
+
                 <div class="input-group">
                     <label for="new-cohort" class="input-group-text">Cohort</label>
                     <select id="new-cohort" class="form-select">
@@ -185,16 +185,16 @@
                 <button class="btn btn-success new-participant-button" type="button">Submit</button>
             </form>
         </div>
-        
-        
-        <div class="add-mentor-pop-up">
+
+
+        <!-- <div class="add-mentor-pop-up">
             <button class="exit-pop-up-button btn">x</button>
             <h3 class="pop-up-title">Add Mentor</h3>
             <form class="form">
                 <div class="input-group">
                     <label for="new-mentor-name" class="input-group-text">Mentor Name</label>
                     <input id="new-mentor-name" class="form-control">
-                </div>       
+                </div>
                 <button class="btn btn-success add-mentor-button" type="button">Submit</button>
             </form>
         </div>
@@ -207,7 +207,7 @@
                     <label for="new-capstone-name" class="input-group-text">Title</label>
                     <input id="new-capstone-name" class="form-control">
                 </div>
-                
+
                 <div class="input-group">
                     <label for="new-structure" class="input-group-text">Structure</label>
                     <select id="new-structure" class="form-select">
@@ -217,9 +217,9 @@
                 </div>
                 <button class="btn btn-success add-capstone-button" type="button">Submit</button>
             </form>
-        </div>
-        
-        <div class="add-elective-pop-up">
+        </div> -->
+
+        <!-- <div class="add-elective-pop-up">
             <button class="exit-pop-up-button btn">x</button>
             <h3 class="pop-up-title">Add Elective</h3>
             <form class="form">
@@ -234,9 +234,9 @@
                 </div>
                 <button class="btn btn-success add-elective-button" type="button">Submit</button>
             </form>
-        </div>
-        
-        <div class="add-tardy-pop-up">
+        </div> -->
+
+        <!-- <div class="add-tardy-pop-up">
             <button class="exit-pop-up-button btn">x</button>
             <h3 class="pop-up-title">Add Tardy</h3>
             <form class="form">
@@ -253,9 +253,9 @@
                 </div>
                 <button class="btn btn-success add-tardy-button" type="button">Submit</button>
             </form>
-        </div>
-        
-        <div class="add-absense-pop-up">
+        </div> -->
+
+        <!-- <div class="add-absense-pop-up">
             <button class="exit-pop-up-button btn">x</button>
             <h3 class="pop-up-title">Add Absense</h3>
             <form class="form">
@@ -271,9 +271,9 @@
                 </div>
                 <button class="btn btn-success add-absense-button" type="button">Submit</button>
             </form>
-        </div>
+        </div> -->
 
-        <div class="add-note-pop-up">
+        <!-- <div class="add-note-pop-up">
             <button class="exit-pop-up-button btn">x</button>
             <h3 class="pop-up-title">Add Note</h3>
             <form class="form">
@@ -281,20 +281,20 @@
                     <label for="new-note-name" class="input-group-text">Title</label>
                     <input id="new-note-name" class="form-control">
                 </div>
-                
+
                 <div class="input-group form-floating">
                     <textarea class="form-control" placeholder="Write Notes Here" name="" id="new-note" cols="30" rows="10"></textarea>
                 </div>
                 <button class="btn btn-success add-note-button" type="button">Submit</button>
             </form>
-        </div>
+        </div> -->
 
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
-    
-    <script src="main.js"></script>
+
+    <script type="module" src="./scripts/main.js"></script>
 </body>
 </html>

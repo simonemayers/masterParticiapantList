@@ -2,36 +2,42 @@
 
 
 // Imports
-import { addStudentRow, addStudentId, addStudentName,  } from "./controller/student.js";
+import { renderNewStudent } from "./controller/student-controller.js";
+import { showCheckboxes, toggleNumberOfAbsenses, takeNewParticipantInput, addStudentCapstoneButton, addStudentMentorButton, addStudentElectiveButton, addStudentTardyButton, addStudentAbsenseButton, addStudentNoteButton } from "./view/view.js"
+import { showNewParticipantPopUp, hideNewParticipantPopUp } from "./controller/new-participant-popup.js"
+
 
 // What we would consider 'state' in an application
-let students = [];
+export let students = [];
 let capstoneProjects = [];
 let absenses = [];
 let tardies = [];
-
-
+let newParticipantButton = document.querySelector("#add-new-participant");
+let exitButton = document.querySelector(".exit-pop-up-button");
+let submitButton = document.querySelector(".new-participant-button");
 let list = document.querySelector(".participant-list tbody");
+let additionalFilters = document.querySelector(".selectBox")
+let absensesDropDown = document.querySelector("#absenses");
+let tardiesDropDown = document.querySelector("#tardies");
 
 
+newParticipantButton.addEventListener("click", showNewParticipantPopUp);
+exitButton.addEventListener("click", hideNewParticipantPopUp);
+additionalFilters.addEventListener("click", showCheckboxes)
 
-function createNewStudent() {
-	let student = students[students.length - 1];
-	let newRow = addStudentRow();
-	newRow.classList.add("student-row");
-	let idTd = addStudentId(student);
-	let nameTd = addStudentName(student);
-	let absensesTd = addStudentAbsenses(student);
-	let tardiesTd = addStudentTardies(student);
-	let notesTd = addStudentNotes(student);
-	let actionTd = addStudentActions(student);
-	let mentorButton = addStudentMentorButton(student);
-	newRow.id = `student${idTd.textContent}`;
-	newRow.appendChild(idTd);
-	newRow.appendChild(nameTd);
-	newRow.appendChild(absensesTd);
-	newRow.appendChild(tardiesTd);
-	newRow.appendChild(notesTd);
-	newRow.appendChild(actionTd);
-	actionTd.appendChild(mentorButton);
-}
+submitButton.addEventListener("click", (e) => {
+	let newStudent = takeNewParticipantInput(students)
+	renderNewStudent(newStudent);
+	hideNewParticipantPopUp();
+	addStudentMentorButton(newStudent, students)
+	addStudentCapstoneButton(newStudent, students);
+
+	addStudentElectiveButton();
+	addStudentTardyButton();
+	addStudentAbsenseButton();
+	addStudentNoteButton();
+});
+
+
+absensesDropDown.addEventListener("change", (e) => toggleNumberOfAbsenses);
+tardiesDropDown.addEventListener("change", (e) => toggleNumberOfTardies);

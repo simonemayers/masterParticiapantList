@@ -2,7 +2,7 @@ export function showNewParticipantPopUp() {
 	document.querySelector(".new-participant-pop-up").style.display = "block";
 }
 
-export function removeNewParticipantPopUp() {
+export function hideNewParticipantPopUp() {
 	document.querySelector(".new-participant-pop-up").style.display = "none";
 	document.querySelector("#new-first-name").value = "";
 	document.querySelector("#new-last-name").value = "";

@@ -1,45 +1,18 @@
-// Broke up the 
+import { showAddAbsensePopUp, hideAddAbsensePopUp } from "./add-absense-popup.js";
 
-export function showAddCapstonePopUp() {
-	document.querySelector(".add-capstone-pop-up").style.display = "block";
-}
+import { showAddCapstonePopUp, hideAddCapstonePopUp } from "./add-capstone-popup.js";
 
-export function removeAddCapstonePopUp() {
-	document.querySelector(".add-capstone-pop-up").style.display = "none";
-	document.querySelector("#new-capstone-name").value = "";
-	document.querySelector("#new-structure").selectedIndex = 0;
-}
+import { showAddElectivePopUp, hideAddElectivePopUp } from "./add-elective-popup.js";
 
-export function showAddElectivePopUp() {
-	document.querySelector(".add-elective-pop-up").style.display = "block";
-}
-export function removeAddElectivePopUp() {
-	document.querySelector(".add-elective-pop-up").style.display = "none";
-	document.querySelector("#new-elective").selectedIndex = 0;
-}
+import { showAddMentorPopUp, hideAddMentorPopUp } from "./add-mentor-popup.js";
 
-export function showAddTardyPopUp() {
-	document.querySelector(".add-tardy-pop-up").style.display = "block";
-}
+import { showAddNotePopUp, hideAddNotePopUp } from "./add-note-popup.js";
 
-export function removeAddTardyPopUp() {
-	document.querySelector(".add-tardy-pop-up").style.display = "none";
-	document.querySelector("#new-tardy").selectedIndex = 0;
-}
+import { showAddTardyPopUp, hideAddTardyPopUp } from "./add-tardy-popup.js";
 
-export function showAddAbsensePopUp() {
-	document.querySelector(".add-absense-pop-up").style.display = "block";
-}
-export function removeAddAbsensePopUp() {
-	document.querySelector(".add-absense-pop-up").style.display = "none";
-	document.querySelector("#new-absense").selectedIndex = 0;
-}
+import { showNewParticipantPopUp, hideNewParticipantPopUp } from "./new-participant-popup.js";
 
-export function showAddNotePopUp() {
-	document.querySelector(".add-note-pop-up").style.display = "block";
-}
-export function removeAddNotePopUp() {
-	document.querySelector(".add-note-pop-up").style.display = "none";
-	document.querySelector("#new-note-name").value = "";
-	document.querySelector("#new-note").value = "";
-}
+import { renderNewStudent } from "./student-controller.js"
+
+
+

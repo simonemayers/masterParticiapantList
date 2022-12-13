@@ -21,6 +21,7 @@ let absensesDropDown = document.querySelector("#absenses");
 let tardiesDropDown = document.querySelector("#tardies");
 let citiesDropDown = document.querySelector("#cities");
 let cohortsDropDown = document.querySelector("#cohorts");
+let electivesDropDown = document.querySelector("#electives")
 
 
 
@@ -59,6 +60,7 @@ absensesDropDown.addEventListener("change", () => {toggleAll(students)});
 tardiesDropDown.addEventListener("change", () => {toggleAll(students)});
 citiesDropDown.addEventListener("change", () => {toggleAll(students)});
 cohortsDropDown.addEventListener("change", () => {toggleAll(students)});
+electivesDropDown.addEventListener("change", () => {toggleAll(students)});
 probationCheckbox.addEventListener("change", () => {toggleAll(students)})
 electiveCheckbox.addEventListener("change", () => {toggleAll(students)})
 notesCheckbox.addEventListener("change", () => {toggleAll(students)})

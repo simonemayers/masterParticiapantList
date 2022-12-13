@@ -16,8 +16,7 @@ import { renderAddProbationPopUp, deleteAddProbationPopUp } from "../controller/
 import { renderAddMeetingPopUp, deleteAddMeetingPopUp } from "../controller/add-meeting-popup.js";
 
 import { Student } from "../model/Student.js"
-import { c, cpp } from "docker/src/languages.js";
-import { format } from "express/lib/response.js";
+
 
 
 
@@ -190,8 +189,9 @@ function getVisibleDOMStudents(){
 	return Array.from(document.querySelector("tbody").childNodes).filter(s => s.style.display === "table-row" || s.style.display === "")
 }
 
-let count = 0;
+
 export function toggleAll(students){
+	console.log(students)
 	let visibleDOMStudents = getVisibleDOMStudents()
 	let probationCheckbox = document.querySelector("#probation");
 	let electiveCheckbox = document.querySelector("#elective");
@@ -228,8 +228,7 @@ export function toggleAll(students){
 	let allDOMStudents = Array.from(document.querySelector("tbody").childNodes)
 	let comboFiltered = students;
 
-	if(document.querySelector("#checkBoxes").style.display === "flex"){
-		selectedFilters.map(c => {
+	selectedFilters.map(c => {
 			if(c === "probation"){
 				comboFiltered = comboFiltered.filter(s => s.getIsOnProbation() === probationCheckboxValue)
 			}
@@ -245,12 +244,15 @@ export function toggleAll(students){
 			if(c === "met"){
 				comboFiltered = comboFiltered.filter(s => s.getHasMetWithStaff() === metCheckboxValue)
 			}
+
 			if(c === "absenses"){
 				if(absenseValue === 0){
 					comboFiltered = comboFiltered.filter(s => s.getAbsenses() === 0)
 				} else if(absenseValue>0){
 					for(let i=1; i<=10; i++){
-						comboFiltered = comboFiltered.filter(s => s.getAbsenses() >= i)
+						if(absenseValue === i){
+							comboFiltered = comboFiltered.filter(s => s.getAbsenses() >= i)
+						}
 					}
 				}
 			}
@@ -259,7 +261,9 @@ export function toggleAll(students){
 					comboFiltered = comboFiltered.filter(s => s.getTardies() === 0)
 				} else if(tardyValue>0){
 					for(let i=1; i<=10; i++){
-						comboFiltered = comboFiltered.filter(s => s.getTardies()>=i)
+						if(tardyValue === i){
+							comboFiltered = comboFiltered.filter(s => s.getTardies()>=i)
+						}
 					}
 				}
 			}
@@ -289,47 +293,33 @@ export function toggleAll(students){
 			}
 			if(c === "electives"){
 				if(electiveValue === "js"){
-					comboFiltered = comboFiltered.filter(s => s.getElective() === "js")
+					comboFiltered = comboFiltered.filter(s => s.getElective() === "javascript")
 				} else if(electiveValue === "da"){
-					comboFiltered = comboFiltered.filter(s => s.getElective() === "da")
-				} else if(electiveValue === "js"){
-					comboFiltered = comboFiltered.filter(s => s.getElective() === "cs")
+					comboFiltered = comboFiltered.filter(s => s.getElective() === "analytics")
 				} else if(electiveValue === "cs"){
-					comboFiltered = comboFiltered.filter(s => s.getElective() === "js")
+					comboFiltered = comboFiltered.filter(s => s.getElective() === "cyber")
 				} else if(electiveValue === "pm"){
-					comboFiltered = comboFiltered.filter(s => s.getElective() === "pm")
-				}
-				console.log(comboFiltered)
-			}
-		})
-
-		allDOMStudents.map(s => {
-			s.style.display = "table-row"
-		})
-
-		visibleDOMStudents = getVisibleDOMStudents()
-
-		visibleDOMStudents.map(s => {
-			if(count > 0){
-				comboFiltered = comboFiltered.map(s => s.id)
-				let id = parseInt(s.id.slice(-1))
-				if(!comboFiltered.includes(id) && isAnythingSelected){
-					s.style.display = "none"
-					comboFiltered = []
-					count ++;
+					comboFiltered = comboFiltered.filter(s => s.getElective() === "manager")
 				}
 			}
-		})
+	})
+
+	allDOMStudents.map(s => {
+		s.style.display = "table-row"
+	})
+
+	visibleDOMStudents = getVisibleDOMStudents()
+	comboFiltered = comboFiltered.map(s => s.id)
+
+	visibleDOMStudents.map(s => {
+		let id = parseInt(s.id.slice(-1))
+		if(!comboFiltered.includes(id)){
+			s.style.display = "none"
+		}
+	})
+	comboFiltered = []
 
 
-	} else{
-		allDOMStudents.map(s => {
-			if(!comboFiltered.includes(parseInt(s.id.slice(-1)))){
-				s.style.display = "table-row";
-				comboFiltered = []
-			}
-		})
-	}
 }
 
 

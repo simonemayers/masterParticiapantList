@@ -1,0 +1,150 @@
+.filter{
+    display: flex;
+    justify-content: space-around;
+}
+
+.multipleSelection {
+    display: flex;
+    width: 100%;
+    margin: auto;
+    margin-left: 2.5%;
+}
+.selectBox{
+    margin-right: 1%;
+}
+
+#floatingSelect option{
+    width: 100%;
+}
+
+#checkBoxes {
+    display: none;
+}
+
+#checkBoxes label {
+    font-size: 0.8em;
+    white-space: nowrap;
+}
+
+.form-check-input{
+    margin: auto 5% auto 0%;
+    width: 1.3em;
+}
+
+.checkbox-group{
+    display: flex;
+    width: fit-content;
+    margin: auto 4% auto 0%;
+}
+
+.new-participant-pop-up, .add-mentor-pop-up{
+    width: 40rem;
+    height: 27rem;
+    position: absolute;
+    top: 20vh;
+    bottom: 25vh;
+    left: 20vw;
+    right: 20vw;
+    background-color: rgb(248, 249, 250);
+    display: none;
+}
+.add-mentor-pop-up{
+    width: 30rem;
+    height: 15rem;
+    top: 25vh;
+    bottom: 25vh;
+    left: 30vw;
+    right: 30vw;
+    display: block;
+}
+.exit-pop-up-button{
+    display: flex;
+    margin: 0% 0% 0% auto;
+}
+.pop-up-title{
+    text-align: center;
+}
+.form{
+    padding: 3% 10%;
+}
+.input-group{
+    padding: 2% 0%;
+}
+.new-participant-button, .add-mentor-button, .add-capstone-button, .add-elective-button, .add-tardy-button, .add-absense-button, .add-note-button, .add-probation-button, .add-meeting-button{
+    margin: 5% auto 1% auto;
+    display: flex;
+}
+.add-capstone-pop-up{
+    width: 30rem;
+    height: 17rem;
+    position: absolute;
+    top: 25vh;
+    bottom: 25vh;
+    left: 30vw;
+    right: 30vw;
+    background-color: rgb(248, 249, 250);
+}
+.add-elective-pop-up{
+    width: 25rem;
+    height: 15rem;
+    position: absolute;
+    top: 25vh;
+    bottom: 25vh;
+    left: 35vw;
+    right: 35vw;
+    background-color: rgb(248, 249, 250);
+}
+.add-tardy-pop-up{
+    width: 25rem;
+    height: 15rem;
+    position: absolute;
+    top: 25vh;
+    bottom: 25vh;
+    left: 35vw;
+    right: 35vw;
+    background-color: rgb(248, 249, 250);
+}
+.add-absense-pop-up{
+    width: 25rem;
+    height: 15rem;
+    position: absolute;
+    top: 25vh;
+    bottom: 25vh;
+    left: 35vw;
+    right: 35vw;
+    background-color: rgb(248, 249, 250);
+}
+.add-note-pop-up{
+    width: 25rem;
+    height: 18rem;
+    position: absolute;
+    top: 25vh;
+    bottom: 25vh;
+    left: 35vw;
+    right: 35vw;
+    background-color: rgb(248, 249, 250);
+}
+.add-meeting-pop-up{
+    width: 25rem;
+    height: 15rem;
+    position: absolute;
+    top: 25vh;
+    bottom: 25vh;
+    left: 35vw;
+    right: 35vw;
+    background-color: rgb(248, 249, 250);
+}
+
+.add-probation-pop-up{
+    width: 25rem;
+    height: 15rem;
+    position: absolute;
+    top: 25vh;
+    bottom: 25vh;
+    left: 35vw;
+    right: 35vw;
+    background-color: rgb(248, 249, 250);
+}
+.actions, .actions-header{
+    width: 25%;
+}

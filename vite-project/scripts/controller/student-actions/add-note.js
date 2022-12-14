@@ -1,6 +1,7 @@
-import { renderAddNotePopUp, deleteAddNotePopUp } from "../controller/add-note-popup";
-import { findCurrentStudent } from "./view";
-import { toggleAll } from "./view";
+import { renderAddNotePopUp, deleteAddNotePopUp } from "../../view/note-popup";
+import { findCurrentStudent } from "../../view/view";
+import { toggleAll } from "../toggle";
+
 
 export function addStudentNote(student, students) {
 	let noteButton = document.querySelector(`.note-btn-${student.id}`);

@@ -1,6 +1,6 @@
-import { renderAddTardyPopUp, deleteAddTardyPopUp } from "../controller/add-tardy-popup";
-import { findCurrentStudent } from "./view";
-import { toggleAll } from "./view";
+import { renderAddTardyPopUp, deleteAddTardyPopUp } from "../../view/tardy-popup";
+import { findCurrentStudent } from "../../view/view";
+import { toggleAll } from "../toggle";
 
 export function addStudentTardy(student, students) {
 	let tardyButton = document.querySelector(`.tardy-btn-${student.id}`);

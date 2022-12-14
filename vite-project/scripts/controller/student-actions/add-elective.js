@@ -1,6 +1,7 @@
-import { renderAddElectivePopUp, deleteAddElectivePopUp } from "../controller/add-elective-popup";
-import { findCurrentStudent } from "./view";
-import { toggleAll } from "./view";
+import { renderAddElectivePopUp, deleteAddElectivePopUp } from "../../view/elective-popup";
+import { findCurrentStudent } from "../../view/view";
+import { toggleAll } from "../toggle";
+
 
 function handleElectiveButtonClick(currentStudent){
 	renderAddElectivePopUp()

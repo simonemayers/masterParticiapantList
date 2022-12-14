@@ -1,6 +1,7 @@
-import { renderAddCapstonePopUp, deleteAddCapstonePopUp } from "../controller/add-capstone-popup";
-import { findCurrentStudent } from "./view";
-import { toggleAll } from "./view";
+import { renderAddCapstonePopUp, deleteAddCapstonePopUp } from "../../view/capstone-popup";
+import { findCurrentStudent } from "../../view/view";
+import { toggleAll } from "../toggle";
+
 
 function handleCapstoneButtonClick(currentStudent){
 	renderAddCapstonePopUp()

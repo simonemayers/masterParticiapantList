@@ -1,6 +1,7 @@
-import { renderAddMeetingPopUp, deleteAddMeetingPopUp } from "../controller/add-meeting-popup";
-import { findCurrentStudent } from "./view";
-import { toggleAll } from "./view";
+import { renderAddMeetingPopUp, deleteAddMeetingPopUp } from "../../view/meeting-popup";
+import { findCurrentStudent } from "../../view/view";
+import { toggleAll } from "../toggle";
+
 
 function handleMeetingButtonClick(currentStudent){
 	renderAddMeetingPopUp()

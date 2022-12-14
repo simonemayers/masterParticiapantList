@@ -1,4 +1,4 @@
-import { renderStudentCapstoneButton, renderStudentMentorButton, renderStudentElectiveButton, renderStudentTardyButton, renderStudentAbsenseButton, renderStudentNoteButton, renderStudentProbationButton, renderStudentMeetingButton } from "./add-student-action-buttons.js"
+import { renderStudentCapstoneButton, renderStudentMentorButton, renderStudentElectiveButton, renderStudentTardyButton, renderStudentAbsenseButton, renderStudentNoteButton, renderStudentProbationButton, renderStudentMeetingButton } from "./student-action-buttons.js"
 
 
 function renderStudentRow() {
@@ -59,7 +59,7 @@ export function renderNewStudent(student) {
 	let tardiesTd = renderStudentTardies(student);
 	let notesTd = renderStudentNotes(student);
 	let actionTd = renderStudentActions(student);
-	
+
 	let mentorButton = renderStudentMentorButton(student);
 	let capstoneButton = renderStudentCapstoneButton(student)
 	let electiveButton = renderStudentElectiveButton(student)

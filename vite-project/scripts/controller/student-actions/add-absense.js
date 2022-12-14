@@ -1,6 +1,7 @@
-import { renderAddAbsensePopUp, deleteAddAbsensePopUp } from "../controller/add-absense-popup";
-import { findCurrentStudent } from "./view";
-import { toggleAll } from "./view";
+import { renderAddAbsensePopUp, deleteAddAbsensePopUp } from "../../view/absense-popup";
+import { findCurrentStudent } from "../../view/view";
+import { toggleAll } from "../toggle";
+
 
 export function addStudentAbsense(student, students) {
 	let absenseButton = document.querySelector(`.absense-btn-${student.id}`);

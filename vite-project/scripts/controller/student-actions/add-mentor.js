@@ -1,6 +1,7 @@
-import { renderAddMentorPopUp, deleteAddMentorPopUp } from "../controller/add-mentor-popup";
-import { findCurrentStudent } from "./view";
-import { toggleAll } from "./view";
+import { renderAddMentorPopUp, deleteAddMentorPopUp } from "../../view/mentor-popup";
+import { findCurrentStudent } from "../../view/view";
+import { toggleAll } from "../toggle";
+
 
 function handleMentorButtonClick(currentStudent){
 	let mentorName = currentStudent.getMentor();

@@ -1,6 +1,7 @@
-import { renderAddProbationPopUp, deleteAddProbationPopUp } from "../controller/add-probation-popup";
-import { findCurrentStudent } from "./view";
-import { toggleAll } from "./view";
+import { renderAddProbationPopUp, deleteAddProbationPopUp } from "../../view/probation-popup";
+import { findCurrentStudent } from "../../view/view";
+import { toggleAll } from "../toggle";
+
 
 
 function handleProbationButtonClick(currentStudent){

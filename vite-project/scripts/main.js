@@ -1,10 +1,17 @@
 // Main JS file where all of the state and data actually 'happens'
 // Imports
 import { renderNewStudent } from "./controller/student-controller.js";
-import { showCheckboxes, takeNewParticipantInput, addStudentCapstoneButton, addStudentMentorButton, addStudentElectiveButton, addStudentTardyButton, addStudentAbsenseButton, addStudentNoteButton, addStudentProbationButton, addStudentMeetingButton, getCurrentFilterSelections, toggleAll } from "./view/view.js"
+import {takeNewParticipantInput, getAllFilters, toggleAll } from "./view/view.js"
 import { showNewParticipantPopUp, hideNewParticipantPopUp } from "./controller/new-participant-popup.js"
-
-
+import { showCheckboxes } from "./view/viewCheckBoxes.js";
+import { addStudentAbsense } from "./view/viewAddAbsense.js";
+import { addStudentTardy } from "./view/viewAddTardy.js";
+import { addStudentMentor } from "./view/viewAddMentor.js";
+import { addStudentCapstone } from "./view/viewAddCapstone.js";
+import { addStudentElective } from "./view/viewAddStudentElective.js";
+import { addStudentNote } from "./view/viewAddNote.js";
+import { addStudentMeeting } from "./view/viewAddMeeting.js";
+import { addStudentProbation } from "./view/viewAddProbation.js";
 
 
 // What we would consider 'state' in an application
@@ -19,7 +26,7 @@ let list = document.querySelector(".participant-list tbody");
 let additionalFilters = document.querySelector(".selectBox")
 
 
-let filters = getCurrentFilterSelections()
+let filters = getAllFilters()
 let [probationCheckbox, electiveCheckbox, notesCheckbox, mentorCheckbox, metCheckbox, absenseOption, tardyOption, cityOption, cohortOption, electiveOption] = filters
 
 newParticipantButton.addEventListener("click", showNewParticipantPopUp);
@@ -32,14 +39,14 @@ submitButton.addEventListener("click", (e) => {
 	let newStudent = takeNewParticipantInput(students)
 	renderNewStudent(newStudent);
 	hideNewParticipantPopUp();
-	addStudentMentorButton(newStudent, students)
-	addStudentCapstoneButton(newStudent, students);
-	addStudentElectiveButton(newStudent, students);
-	addStudentTardyButton(newStudent, students);
-	addStudentAbsenseButton(newStudent, students);
-	addStudentNoteButton(newStudent, students);
-	addStudentMeetingButton(newStudent, students)
-	addStudentProbationButton(newStudent, students);
+	addStudentMentor(newStudent, students)
+	addStudentCapstone(newStudent, students);
+	addStudentElective(newStudent, students);
+	addStudentTardy(newStudent, students);
+	addStudentAbsense(newStudent, students);
+	addStudentNote(newStudent, students);
+	addStudentMeeting(newStudent, students)
+	addStudentProbation(newStudent, students);
 
 	toggleAll(students)
 });

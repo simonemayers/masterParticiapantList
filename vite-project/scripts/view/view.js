@@ -91,108 +91,14 @@ export function takeNewParticipantInput(students){
 	return newStudent;
 }
 
-export function toggleNumberOfAbsenses(students){
-	let selected = parseInt(document.querySelector("#absenses")[document.querySelector("#absenses").selectedIndex].value);
-	let allDOMStudents = Array.from(document.querySelector("tbody").childNodes).filter(s => s.style.display === "table-row" || s.style.display === "")
-	let studentMatches;
-	if(selected === 0){
-		studentMatches = students.filter(s => s.getAbsenses() === selected).map(s => s.id)
-	} else if(selected >0){
-		studentMatches = students.filter(s => s.getAbsenses() >= selected).map(s => s.id)
-	}
-	allDOMStudents.map(s => {
-		if(!studentMatches.includes(parseInt(s.id[s.id.length -1]))){
-			s.style.display = "none"
-		} else{
-			s.style.display = "table-row"
-		}
-	})
-	return studentMatches;
-}
-
-export function toggleNumberOfTardies(students){
-	let selected = parseInt(document.querySelector("#tardies")[document.querySelector("#tardies").selectedIndex].value);
-	let allDOMStudents = Array.from(document.querySelector("tbody").childNodes).filter(s => s.style.display === "table-row" || s.style.display === "")
-	let studentMatches;
-	if(selected=== 0){
-		studentMatches = students.filter(s => s.getTardies() === selected).map(s => s.id)
-	} else if(selected >0){
-		studentMatches = students.filter(s => s.getTardies() >= selected).map(s => s.id)
-	}
-	allDOMStudents.map(s => {
-		if(!studentMatches.includes(parseInt(s.id[s.id.length -1]))){
-			s.style.display = "none"
-		} else{
-			s.style.display = "table-row"
-		}
-	})
-	return studentMatches;
-}
 
 
-export function toggleCities(students){
-	let selected = document.querySelector("#cities")[document.querySelector("#cities").selectedIndex].value;
-	let studentMatches = students.filter(s => s.getCity() === selected).map(s => s.id)
-	let allDOMStudents = Array.from(document.querySelector("tbody").childNodes).filter(s => s.style.display === "table-row" || s.style.display === "")
-	allDOMStudents.map(s => {
-		if(!studentMatches.includes(parseInt(s.id[s.id.length -1]))){
-			s.style.display = "none"
-		} else{
-			s.style.display = "table-row"
-		}
-	})
-	return studentMatches;
-}
-
-export function toggleCohorts(students){
-	let selected = document.querySelector("#cohorts")[document.querySelector("#cohorts").selectedIndex].value;
-	let studentMatches = students.filter(s => s.getCohort() === selected).map(s => s.id)
-	let allDOMStudents = Array.from(document.querySelector("tbody").childNodes).filter(s => s.style.display === "table-row" || s.style.display === "")
-	allDOMStudents.map(s => {
-		if(!studentMatches.includes(parseInt(s.id[s.id.length -1]))){
-			s.style.display = "none"
-		} else{
-			s.style.display = "table-row"
-		}
-	})
-	return studentMatches;
-}
-
-export function toggleElectives(students){
-	let selected = document.querySelector("#electives")[document.querySelector("#electives").selectedIndex].value;
-	let studentMatches = students.filter(s => s.getElective() === selected).map(s => s.id)
-	let allDOMStudents = Array.from(document.querySelector("tbody").childNodes).filter(s => s.style.display === "table-row" || s.style.display === "")
-	allDOMStudents.map(s => {
-		if(!studentMatches.includes(parseInt(s.id[s.id.length -1]))){
-			s.style.display = "none"
-		} else{
-			s.style.display = "table-row"
-		}
-	})
-	return studentMatches;
-}
-
-function resetToggle(arr){
-	arr.map(s => {
-		s.style.display = "table-row"
-		arr = []
-	})
-}
-function showToggleMatches(matches, s, hidden){
-	if(!matches.includes(parseInt(s.id.slice(-1)))){
-		s.style.display = "none"
-		hidden.push(s)
-	}
-}
 
 function getVisibleDOMStudents(){
 	return Array.from(document.querySelector("tbody").childNodes).filter(s => s.style.display === "table-row" || s.style.display === "")
 }
 
-
-export function toggleAll(students){
-	console.log(students)
-	let visibleDOMStudents = getVisibleDOMStudents()
+export function getCurrentFilterSelections(){
 	let probationCheckbox = document.querySelector("#probation");
 	let electiveCheckbox = document.querySelector("#elective");
 	let notesCheckbox = document.querySelector("#notes");
@@ -203,7 +109,13 @@ export function toggleAll(students){
 	let cityOption = document.querySelector("#cities");
 	let cohortOption = document.querySelector("#cohorts");
 	let electiveOption = document.querySelector("#electives");
+	return [probationCheckbox, electiveCheckbox, notesCheckbox, mentorCheckbox, metCheckbox, absenseOption, tardyOption, cityOption, cohortOption, electiveOption]
+}
 
+export function toggleAll(students){
+	let visibleDOMStudents = getVisibleDOMStudents()
+	let filters = getCurrentFilterSelections()
+	let [probationCheckbox, electiveCheckbox, notesCheckbox, mentorCheckbox, metCheckbox, absenseOption, tardyOption, cityOption, cohortOption, electiveOption] = filters
 	let probationCheckboxValue = probationCheckbox.checked;
 	let electiveCheckboxValue = electiveCheckbox.checked;
 	let notesCheckboxValue = notesCheckbox.checked;
@@ -215,12 +127,8 @@ export function toggleAll(students){
 	let cohortValue = cohortOption[cohortOption.selectedIndex].value
 	let electiveValue = electiveOption[electiveOption.selectedIndex].value
 
-
-	let isAnythingSelected = probationCheckboxValue || electiveCheckboxValue || notesCheckboxValue ||mentorCheckboxValue || metCheckboxValue || absenseValue != -1 || tardyValue != -1 || cityValue != -1 || cohortValue != -1 || electiveValue != -1
-
 	let checkBoxes = [probationCheckbox, electiveCheckbox, notesCheckbox, mentorCheckbox, metCheckbox]
 	let options = [absenseOption, tardyOption, cityOption, cohortOption, electiveOption]
-
 	let whatIsChecked = checkBoxes.filter(c => c.checked ===true).map(i => i.id);
 	let whatIsSelected = options.filter(o => o[o.selectedIndex].value != -1).map(i => i.id)
 	let selectedFilters = [...whatIsChecked, ...whatIsSelected]
@@ -230,7 +138,7 @@ export function toggleAll(students){
 
 	selectedFilters.map(c => {
 			if(c === "probation"){
-				comboFiltered = comboFiltered.filter(s => s.getIsOnProbation() === probationCheckboxValue)
+				comboFiltered = comboFiltered.filter(s => Boolean(s.getIsOnProbation()) === probationCheckboxValue)
 			}
 			if(c === "elective"){
 				comboFiltered = comboFiltered.filter(s => Boolean(s.getElective()) === electiveCheckboxValue)
@@ -242,7 +150,7 @@ export function toggleAll(students){
 				comboFiltered = comboFiltered.filter(s => Boolean(s.getMentor()) === mentorCheckboxValue)
 			}
 			if(c === "met"){
-				comboFiltered = comboFiltered.filter(s => s.getHasMetWithStaff() === metCheckboxValue)
+				comboFiltered = comboFiltered.filter(s => Boolean(s.getHasMetWithStaff()) === metCheckboxValue)
 			}
 
 			if(c === "absenses"){
@@ -318,7 +226,6 @@ export function toggleAll(students){
 		}
 	})
 	comboFiltered = []
-
 
 }
 

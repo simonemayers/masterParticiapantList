@@ -1,3 +1,6 @@
+import { disableAllButtons } from "../controller/disbleButtons"
+import { enableAllButtons } from "../controller/enableButtons"
+
 export function renderAddNotePopUp(){
 	let bodyContainer = document.querySelector(".body-container")
 	let popup = document.createElement("div")
@@ -47,9 +50,11 @@ export function renderAddNotePopUp(){
 	form.appendChild(textInputGroup)
 	textInputGroup.appendChild(textArea)
 	form.appendChild(submitButton)
+	disableAllButtons()
 }
 
 export function deleteAddNotePopUp(){
 	let notePopUp = document.querySelector(".add-note-pop-up")
 	notePopUp.parentElement.removeChild(notePopUp)
+	enableAllButtons()
 }

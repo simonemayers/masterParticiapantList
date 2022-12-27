@@ -1,3 +1,6 @@
+import { disableAllButtons } from "../controller/disbleButtons"
+import { enableAllButtons } from "../controller/enableButtons"
+
 export function renderAddMentorPopUp(){
 	let bodyContainer = document.querySelector(".body-container")
 	let popup = document.createElement("div")
@@ -35,9 +38,11 @@ export function renderAddMentorPopUp(){
 	inputGroup.appendChild(label)
 	inputGroup.appendChild(input)
 	form.appendChild(submitButton)
+	disableAllButtons()
 }
 
 export function deleteAddMentorPopUp(){
 	let mentorPopUp = document.querySelector(".add-mentor-pop-up")
 	mentorPopUp.parentElement.removeChild(mentorPopUp)
+	enableAllButtons()
 }

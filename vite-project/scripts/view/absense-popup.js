@@ -1,3 +1,6 @@
+import { disableAllButtons } from "../controller/disbleButtons"
+import { enableAllButtons } from "../controller/enableButtons"
+
 export function renderAddAbsensePopUp(){
 	let bodyContainer = document.querySelector(".body-container")
 	let popup = document.createElement("div")
@@ -43,9 +46,11 @@ export function renderAddAbsensePopUp(){
 	select.appendChild(excusedOption)
 	select.appendChild(unexcusedOption)
 	form.appendChild(submitButton)
+	disableAllButtons()
 }
 
 export function deleteAddAbsensePopUp(){
 	let absensePopUp = document.querySelector(".add-absense-pop-up")
 	absensePopUp.parentElement.removeChild(absensePopUp)
+	enableAllButtons()
 }

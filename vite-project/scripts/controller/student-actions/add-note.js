@@ -18,7 +18,7 @@ export function addStudentNote(student, students) {
 			let title = document.querySelector("#new-note-name").value
 			let description = document.querySelector("#new-note").value
 			currentStudent.addNote(title, description)
-			document.querySelector(`#student${currentStudent.id}`).querySelector(".notes").innerHTML = currentStudent.getNotes()
+			// document.querySelector(`#student${currentStudent.id}`).querySelector(".notes").innerHTML = currentStudent.getNotes()
 			deleteAddNotePopUp()
 			toggleAll(students)
 		})

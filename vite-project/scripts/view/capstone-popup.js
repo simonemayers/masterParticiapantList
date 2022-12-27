@@ -1,3 +1,6 @@
+import { disableAllButtons } from "../controller/disbleButtons"
+import { enableAllButtons } from "../controller/enableButtons"
+
 export function renderAddCapstonePopUp(){
 	let bodyContainer = document.querySelector(".body-container")
 	let popup = document.createElement("div")
@@ -55,9 +58,11 @@ export function renderAddCapstonePopUp(){
 	select.appendChild(trueOption)
 	select.appendChild(falseOption)
 	form.appendChild(submitButton)
+	disableAllButtons()
 }
 
 export function deleteAddCapstonePopUp(){
 	let capstonePopUp = document.querySelector(".add-capstone-pop-up")
 	capstonePopUp.parentElement.removeChild(capstonePopUp)
+	enableAllButtons()
 }

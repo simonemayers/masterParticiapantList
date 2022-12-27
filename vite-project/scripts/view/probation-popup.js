@@ -1,3 +1,6 @@
+import { disableAllButtons } from "../controller/disbleButtons"
+import { enableAllButtons } from "../controller/enableButtons"
+
 export function renderAddProbationPopUp(){
 	let bodyContainer = document.querySelector(".body-container")
 	let popup = document.createElement("div")
@@ -43,9 +46,11 @@ export function renderAddProbationPopUp(){
 	select.appendChild(excusedOption)
 	select.appendChild(unexcusedOption)
 	form.appendChild(submitButton)
+	disableAllButtons()
 }
 
 export function deleteAddProbationPopUp(){
 	let probationPopUp = document.querySelector(".add-probation-pop-up")
 	probationPopUp.parentElement.removeChild(probationPopUp)
+	enableAllButtons()
 }

@@ -1,3 +1,6 @@
+import { disableAllButtons } from "../controller/disbleButtons"
+import { enableAllButtons } from "../controller/enableButtons"
+
 export function renderAddMeetingPopUp(){
 	let bodyContainer = document.querySelector(".body-container")
 	let popup = document.createElement("div")
@@ -43,9 +46,11 @@ export function renderAddMeetingPopUp(){
 	select.appendChild(excusedOption)
 	select.appendChild(unexcusedOption)
 	form.appendChild(submitButton)
+	disableAllButtons()
 }
 
 export function deleteAddMeetingPopUp(){
 	let meetingPopUp = document.querySelector(".add-meeting-pop-up")
 	meetingPopUp.parentElement.removeChild(meetingPopUp)
+	enableAllButtons()
 }

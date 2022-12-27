@@ -124,15 +124,15 @@
             </select>
         </div>
 
-        <table class="participant-list table outside">
+        <table class="participant-list table">
             <thead>
                 <tr>
                     <th scope="col">ID#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Absenses</th>
                     <th scope="col">Tardies</th>
-                    <th scope="col">Notes</th>
-                    <th scope="col" class="actions-header">Actions</th>
+                    <!-- <th scope="col">Notes</th> -->
+                    <!-- <th scope="col" class="actions-header">Actions</th> -->
                 </tr>
             </thead>
             <tbody></tbody>
@@ -176,6 +176,107 @@
                 <button class="btn btn-success new-participant-button" type="button">Submit</button>
             </form>
         </div>
+
+        <!-- <div class="side-panel">
+            <div class="side-panel-container">
+                <div class="panels">
+                    <button class="details-panel btn active-panel">Details</button>
+                    <button class="notes-panel btn">Notes</button>
+                </div>
+
+                <div class="student-details-panel">
+                    <div class="identifier-group">
+                        <div class="username-group input-group">
+                            <label for="username" class="input-group-text">Username</label>
+                            <input id="username" class="form-control username-input" type="text" disabled>
+                        </div>
+                        <div class="student-id-group input-group">
+                            <label for="student-id" class="input-group-text">ID</label>
+                            <input id="student-id" class="form-control student-id-input" type="text" disabled>
+                        </div>
+                    </div>
+                    <div class="name-group">
+                        <div class="label-and-edit-button">
+                            <label for="name">Name</label>
+                            <button class="edit-btn btn">Edit</button>
+                        </div>
+                        <div class="full-name-group">
+                            <div class="first-name-group input-group">
+                                <label for="first-name" class="input-group-text">First</label>
+                                <input id="first-name" class="form-control first-name-input" type="text" disabled>
+                            </div>
+                            <div class="last-name-group input-group">
+                                <label for="last-name" class="input-group-text">Last</label>
+                                <input id="last-name" class="form-control last-name-input" type="text" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="probation-group">
+                        <div class="label-and-edit-button">
+                            <label for="probation">Probation Status</label>
+                            <button class="edit-btn btn">Edit</button>
+                        </div>
+                        <select class="form-select" name="probation" id="probation" disabled>
+                            <option value="true">Active</option>
+                            <option value="false" selected>Inactive</option>
+                        </select>
+                    </div>
+                    <div class="met-group">
+                        <div class="label-and-edit-button">
+                            <label for="met">Met With Staff</label>
+                            <button class="edit-btn btn">Edit</button>
+                        </div>
+                        <select class="form-select" name="met" id="met" disabled>
+                            <option value="true">True</option>
+                            <option value="false" selected>False</option>
+                        </select>
+                    </div>
+                    <div class="mentor-group">
+                        <div class="label-and-edit-button">
+                            <label for="mentor">Mentor Name</label>
+                            <button class="add-btn btn">Add</button>
+                        </div>
+                        <div class="edit-mentor-group">
+                            <input id="mentor" class="form-control mentor-name-input" type="text">
+                        </div>
+                    </div>
+                    <div class="capstone-group">
+                        <div class="label-and-edit-button">
+                            <label for="capstone">Capstone Project</label>
+                            <button class="add-btn btn">Add</button>
+                        </div>
+                        <div class="edit-capstone-group">
+                            <div class="title-group input-group">
+                                <label for="title" class="input-group-text">Title</label>
+                                <input id="title" class="form-control title-input" type="text">
+                            </div>
+                            <select class="form-select" name="type" id="type">
+                                <option value="false">Individual</option>
+                                <option value="true">Group</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="elective-group">
+                        <div class="label-and-edit-button">
+                            <label for="elective">Elective</label>
+                            <button class="add-btn btn">Add</button>
+                        </div>
+                        <select id="new-elective" class="form-select edit-elective-group">
+                            <option value="javascript">JavaScript Libraries</option>
+                            <option value="analytics">Data Analytics</option>
+                            <option value="cyber">Cyber Security</option>
+                            <option value="management">Project Management</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="side-panel-footer">
+                    <button class="btn btn-danger btn-lg">Exit</button>
+                    <button class="btn btn-success btn-lg">Save</button>
+                </div>
+            </div>
+        </div> -->
+
 
     </div>
 

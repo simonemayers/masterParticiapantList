@@ -21,6 +21,24 @@ export class Student {
 	getFullName() {
 		return `${this.firstName} ${this.lastName}`;
 	}
+	setFirstName(name){
+		this.firstName = name
+	}
+	getFirstName(){
+		return this.firstName
+	}
+	setLastName(name){
+		this.lastName = name
+	}
+	getLastName(){
+		return this.lastName
+	}
+	getUserName(){
+		return this.userName
+	}
+	getId(){
+		return this.id
+	}
 	addAbsense(reason) {
 		let newAbsense = new Absense(reason, this);
 		this.absenses.push(newAbsense);

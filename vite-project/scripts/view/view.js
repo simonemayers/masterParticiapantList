@@ -5,14 +5,10 @@ import { getAllFilters } from "./filters.js";
 import { showCheckboxes } from "../controller/checkboxes.js";
 import { addStudentAbsense } from "../controller/student-actions/add-absense.js";
 import { addStudentTardy } from "../controller/student-actions/add-tardy.js";
-import { addStudentMentor } from "../controller/student-actions/add-mentor.js";
-import { addStudentCapstone } from "../controller/student-actions/add-capstone.js";
-import { addStudentElective } from "../controller/student-actions/add-elective.js";
 import { addStudentNote } from "../controller/student-actions/add-note.js";
-import { addStudentMeeting } from "../controller/student-actions/add-meeting.js";
-import { addStudentProbation } from "../controller/student-actions/add-probation.js";
 import { toggleAll } from "../controller/toggle.js";
 import {showNewParticipantPopUp, hideNewParticipantPopUp} from "./new-participant-popup"
+import { closeSidePanel } from "../controller/side-panel/exit-button.js";
 
 
 
@@ -62,7 +58,6 @@ export function getVisibleDOMStudents(){
 	return Array.from(document.querySelector("tbody").childNodes).filter(s => s.style.display === "table-row" || s.style.display === "")
 }
 
-
 export let students = [];
 export let capstoneProjects = [];
 export let absenses = [];
@@ -86,14 +81,9 @@ export function runApp(){
 		let newStudent = takeNewParticipantInput(students)
 		renderNewStudent(newStudent);
 		hideNewParticipantPopUp();
-		addStudentMentor(newStudent, students)
-		addStudentCapstone(newStudent, students);
-		addStudentElective(newStudent, students);
 		addStudentTardy(newStudent, students);
 		addStudentAbsense(newStudent, students);
 		addStudentNote(newStudent, students);
-		addStudentMeeting(newStudent, students)
-		addStudentProbation(newStudent, students);
 		toggleAll(students)
 	});
 
@@ -108,6 +98,10 @@ export function runApp(){
 	mentorCheckbox.parentElement.addEventListener("change", () => {toggleAll(students)})
 	metCheckbox.parentElement.addEventListener("change", () => {toggleAll(students)})
 	additionalFilters.addEventListener("click", () => {toggleAll(students)})
+
+
+
+
 }
 
 

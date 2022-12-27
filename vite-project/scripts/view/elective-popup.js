@@ -1,3 +1,6 @@
+import { disableAllButtons } from "../controller/disbleButtons"
+import { enableAllButtons } from "../controller/enableButtons"
+
 export function renderAddElectivePopUp(){
 	let bodyContainer = document.querySelector(".body-container")
 	let popup = document.createElement("div")
@@ -50,9 +53,11 @@ export function renderAddElectivePopUp(){
 	select.appendChild(cyberOption)
 	select.appendChild(managementOption)
 	form.appendChild(submitButton)
+	disableAllButtons()
 }
 
 export function deleteAddElectivePopUp(){
 	let electivePopUp = document.querySelector(".add-elective-pop-up")
 	electivePopUp.parentElement.removeChild(electivePopUp)
+	enableAllButtons()
 }

@@ -148,3 +148,83 @@
 .actions, .actions-header{
     width: 25%;
 }
+.side-panel{
+    width: 60rem;
+    /* height: 100%; */
+    position: absolute;
+    top: 0vh;
+    /* bottom: 0vh; */
+    right: 0vw;
+    background-color: rgb(248, 249, 250);
+    /* display: none; */
+}
+.side-panel-container{
+    width: 90%;
+    margin: auto;
+    padding-top: 24px;
+}
+.panels{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #e9ecef;
+    margin-bottom: 5%;
+}
+.panels button{
+    width: 100%;
+    font-size: 1.4rem;
+}
+.active-panel{
+    background-color: white;
+    border: solid 1px black;
+    font-weight: 500;
+}
+.identifier-group{
+    display: flex;
+    justify-content: space-between;
+}
+.username-group, .student-id-group{
+    width: 48%;
+}
+
+.name-group{
+    width: 100%;
+}
+.label-and-edit-button{
+    margin-top:1%;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    align-items: center;
+}
+.label-and-edit-button button{
+    font-size: 1.1rem;
+}
+.full-name-group{
+    display: flex;
+    justify-content: space-between;
+}
+.first-name-group, .last-name-group{
+    width: 48%;
+}
+
+.side-panel .input-group{
+    padding: 0%;
+}
+.name-group, .probation-group, .met-group, .mentor-group, .capstone-group, .elective-group{
+    padding-top: 16px;
+}
+.side-panel-footer{
+    width: 90%;
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    padding: 5% 0%;
+}
+.edit-capstone-group{
+    display: flex;
+}
+
+
+

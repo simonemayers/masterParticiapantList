@@ -24,7 +24,8 @@
                             <a class="nav-link active" aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a id = "add-new-participant" class="nav-link" href="#">Add New Participant</a>
+                            <!-- <a id = "add-new-participant" class="nav-link" href="#">Add New Participant</a> -->
+                            <button id = "add-new-participant" class="nav-link btn">Add New Participant</button>
                         </li>
                     </ul>
                     <form class="d-flex" role="search">
@@ -69,7 +70,7 @@
             </div>
 
             <select name="absenses" id="absenses" class="form-select m-5">
-                <option value="-1" selected>Absenses</option>
+                <option value="-1" selected>All Absenses</option>
                 <option value="0">0</option>
                 <option value="1">1+</option>
                 <option value="2">2+</option>
@@ -84,7 +85,7 @@
             </select>
 
             <select name="tardies" id="tardies" class="form-select m-5">
-                <option value="-1" selected>Tardies</option>
+                <option value="-1" selected>All Tardies</option>
                 <option value="0">0</option>
                 <option value="1">1+</option>
                 <option value="2">2+</option>
@@ -99,7 +100,7 @@
             </select>
 
             <select name="cities" id="cities" class="form-select m-5">
-                <option value="-1" selected>Cities</option>
+                <option value="-1" selected>All Cities</option>
                 <option value="charlotte">Charlotte, NC</option>
                 <option value="raleigh">Raleigh, NC</option>
                 <option value="wilmington">Wilmington, NC</option>
@@ -110,13 +111,13 @@
             </select>
 
             <select name="cohorts" id="cohorts" class="form-select m-5">
-                <option value="-1">Cohort</option>
+                <option value="-1">All Cohorts</option>
                 <option value="c5" selected>Cohort 5</option>
                 <option value="c4">Cohort 4</option>
             </select>
 
             <select name="electives" id="electives" class="form-select m-5">
-                <option value="-1" selected>Electives</option>
+                <option value="-1" selected>All Electives</option>
                 <option value="js">JavaScript Libraries</option>
                 <option value="da">Data Analytics</option>
                 <option value="cs">Cyber Security</option>
@@ -131,8 +132,6 @@
                     <th scope="col">Name</th>
                     <th scope="col">Absenses</th>
                     <th scope="col">Tardies</th>
-                    <!-- <th scope="col">Notes</th> -->
-                    <!-- <th scope="col" class="actions-header">Actions</th> -->
                 </tr>
             </thead>
             <tbody></tbody>
@@ -193,6 +192,16 @@
                         <div class="student-id-group input-group">
                             <label for="student-id" class="input-group-text">ID</label>
                             <input id="student-id" class="form-control student-id-input" type="text" disabled>
+                        </div>
+                    </div>
+                    <div class="city-and-cohort-group">
+                        <div class="city-group input-group">
+                            <label for="city-info" class="input-group-text">City</label>
+                            <input type="text" id="city-info" class="form-control city-info-input" disabled>
+                        </div>
+                        <div class="cohort-group input-group">
+                            <label for="cohort-info" class="input-group-text">Cohort</label>
+                            <input type="text" name="cohort-info" id="cohort-info" class="form-control cohort-info-input" disabled>
                         </div>
                     </div>
                     <div class="name-group">
@@ -268,10 +277,10 @@
                             <option value="management">Project Management</option>
                         </select>
                     </div>
-                </div>
-                <div class="side-panel-footer">
-                    <button class="btn btn-danger btn-lg">Exit</button>
-                    <button class="btn btn-success btn-lg">Save</button>
+                    <div class="side-panel-footer">
+                        <button class="btn btn-danger btn-lg">Exit</button>
+                        <button class="btn btn-success btn-lg">Save</button>
+                    </div>
                 </div>
 
                 <div class="student-notes-panel">

@@ -9,8 +9,6 @@ export function renderAddNoteButton(){
 export function renderNotesPanel(){
     let notesPanel = document.createElement("div")
     notesPanel.classList.add("student-notes-panel")
-    // notesPanel.appendChild(notesPreview)
-    // notesPreview.appendChild(addButton)
     return notesPanel
 }
 export function renderNotesPreview(){

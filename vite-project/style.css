@@ -162,6 +162,7 @@
     width: 90%;
     margin: auto;
     padding-top: 24px;
+    height: 100%;
 }
 .panels{
     width: 100%;
@@ -179,12 +180,20 @@
     border: solid 1px black;
     font-weight: 500;
 }
-.identifier-group{
+.identifier-group, .city-and-cohort-group{
     display: flex;
     justify-content: space-between;
 }
-.username-group, .student-id-group{
+.username-group, .student-id-group, .city-group, .cohort-group{
     width: 48%;
+}
+.identifier-group label, .city-and-cohort-group label{
+    border-right: 2px solid #ced4da;
+    border-radius: .375rem;
+}
+.identifier-group input:disabled, .city-and-cohort-group input:disabled{
+    background-color: rgb(248, 249, 250);
+    border: 0px;
 }
 
 .name-group{
@@ -212,7 +221,7 @@
 .side-panel .input-group{
     padding: 0%;
 }
-.name-group, .probation-group, .met-group, .mentor-group, .capstone-group, .elective-group{
+.name-group, .probation-group, .met-group, .mentor-group, .capstone-group, .elective-group, .city-and-cohort-group{
     padding-top: 16px;
 }
 .side-panel-footer{
@@ -220,15 +229,17 @@
     display: flex;
     margin: auto;
     justify-content: space-between;
-    padding: 5% 0%;
+    /* padding: 5% 0%; */
+    padding-top: 5%;
 }
 .edit-capstone-group{
     display: flex;
 }
 
 .student-notes-panel{
-    /* height: 100%; */
+    height: 90%;
     /* display: flex; */
+    position: relative;
 }
 .note-container{
     display: flex;
@@ -243,7 +254,6 @@
 .note-title-container{
     display: flex;
     align-items: center;
-    /* justify-content: space-around; */
     width: 80%;
 }
 .note-title{
@@ -254,11 +264,7 @@
 }
 .add-note-button{
     background-color: rgb(217, 217, 217);
-    /* display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-    text-align: center; */
+    margin-bottom: 5%;
 }
 .note-details-container{
     /* display: flex; */
@@ -279,7 +285,6 @@
     font-size: 1.5rem;
 }
 .note-details-footer{
-    /* width: 100%; */
     display: flex;
     justify-content: space-between;
     padding-top: 5%;
@@ -287,4 +292,22 @@
 
 .notes-panel.btn:hover, .details-panel.btn:hover {
     background-color:white;
+}
+
+#add-new-participant:disabled{
+    border: none;
+}
+
+.note-details-footer, .side-panel-footer{
+    position: absolute;
+    bottom: 5%;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+}
+.student-details-panel{
+    position: relative;
+    height: 90%;
 }

@@ -76,11 +76,6 @@ export class Student {
 		this.notes.push(newNote);
 	}
 	getNotes() {
-		// let notesString = "";
-		// this.notes.forEach((note) => {
-		// 	notesString += note.description + "<br>";
-		// });
-		// return notesString;
 		return this.notes;
 	}
 	addMentor(name) {

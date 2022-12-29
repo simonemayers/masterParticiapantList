@@ -5,6 +5,7 @@ import { renderMetGroup } from "./met"
 import { renderMentorGroup } from "./mentor"
 import { renderCapstoneGroup } from "./capstone"
 import { renderElectiveGroup } from "./elective"
+import { renderCityAndCohortGroup } from "./city-and-cohort"
 
 
 export function renderDetailsFooter(){
@@ -28,7 +29,9 @@ export function renderDetailsPanel(){
     let detailsPanel = document.createElement("div")
     detailsPanel.classList.add("student-details-panel")
     let identifierGroup = renderIdentifierGroup()
+    let cityAndCohortGroup = renderCityAndCohortGroup()
     detailsPanel.appendChild(identifierGroup)
+    detailsPanel.appendChild(cityAndCohortGroup)
     let nameGroup = renderNameGroup()
     detailsPanel.appendChild(nameGroup)
     let probationGroup = renderProbationGroup()

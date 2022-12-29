@@ -43,19 +43,6 @@ function renderStudentTardies(student) {
 	return tardiesTd;
 }
 
-// function renderStudentNotes(student) {
-// 	let notesTd = document.createElement("td");
-// 	notesTd.innerHTML = student.getNotes();
-// 	notesTd.classList.add("notes");
-// 	return notesTd;
-// }
-
-// function renderStudentActions(student) {
-// 	let actionTd = document.createElement("td");
-// 	actionTd.classList.add("actions");
-// 	return actionTd;
-// }
-
 
 
 export function renderNewStudent(student) {
@@ -65,33 +52,11 @@ export function renderNewStudent(student) {
 	let nameTd = renderStudentName(student);
 	let absensesTd = renderStudentAbsenses(student);
 	let tardiesTd = renderStudentTardies(student);
-	// let notesTd = renderStudentNotes(student);
-	// let actionTd = renderStudentActions(student);
-	// let mentorButton = renderStudentMentorButton(student);
-	// let capstoneButton = renderStudentCapstoneButton(student)
-	// let electiveButton = renderStudentElectiveButton(student)
-	// let tardyButton = renderStudentTardyButton(student)
-	// let absenseButton = renderStudentAbsenseButton(student)
-	// let noteButton = renderStudentNoteButton(student)
-	// let probationButton = renderStudentProbationButton(student)
-	// let meetingButton = renderStudentMeetingButton(student)
-
 	newRow.id = `student${idTd.textContent}`;
 	newRow.appendChild(idTd);
 	newRow.appendChild(nameTd);
 	newRow.appendChild(absensesTd);
 	newRow.appendChild(tardiesTd);
-	// newRow.appendChild(notesTd);
-	// newRow.appendChild(actionTd);
-	// actionTd.appendChild(mentorButton);
-	// actionTd.appendChild(capstoneButton)
-	// actionTd.appendChild(electiveButton)
-	// actionTd.appendChild(tardyButton)
-	// actionTd.appendChild(absenseButton)
-	// actionTd.appendChild(noteButton)
-	// actionTd.appendChild(meetingButton)
-	// actionTd.appendChild(probationButton)
-	// return newRow
 
 	function enableInput(e, input){
 		e.target.parentElement.parentElement.querySelector(`${input}`).disabled = false
@@ -102,6 +67,12 @@ export function renderNewStudent(student) {
 	}
 	function showStudentIdOnForm(sidePanel){
 		sidePanel.querySelector("#student-id").value = student.getId()
+	}
+	function showCityOnForm(sidePanel){
+		sidePanel.querySelector("#city-info").value = student.getCity()[0].toUpperCase() + student.getCity().slice(1)
+	}
+	function showCohortOnForm(sidePanel){
+		sidePanel.querySelector("#cohort-info").value = student.getCohort()
 	}
 	function showFirstNameOnForm(sidePanel){
 		sidePanel.querySelector(".first-name-input").value = student.getFirstName()
@@ -117,16 +88,30 @@ export function renderNewStudent(student) {
 	}
 
 	newRow.addEventListener("click", (e) => {
+		document.querySelector("#add-new-participant").disabled = true;
+		if((document.querySelector(".side-panel"))){
+			document.querySelector(".body-container").removeChild(document.querySelector(".side-panel"))
+		}
 		let sidePanel = renderSidePanel()
-
 		let detailsPanel = renderDetailsPanel()
 		sidePanel.appendChild(detailsPanel)
 		showUsernameOnForm(sidePanel)
 		showStudentIdOnForm(sidePanel)
+		showCityOnForm(sidePanel)
+		showCohortOnForm(sidePanel)
 		showFirstNameOnForm(sidePanel)
 		showLastNameOnForm(sidePanel)
 		showProbationStatusOnForm(sidePanel)
 		showMetStatusOnForm(sidePanel)
+
+		let notesButton = document.querySelector(".notes-panel")
+		let notesPanel = renderNotesPanel()
+		let notesPreview = renderNotesPreview()
+		let addNoteButton = renderAddNoteButton()
+		let noteDetailsContainer = renderNoteDetailsContainer()
+		let detailsPanelButton = document.querySelector(".details-panel.btn")
+		let notesPanelButton = document.querySelector(".notes-panel.btn")
+		let editingNote;
 
 		if(student.getMentor()){
 			sidePanel.querySelector("#mentor").value = student.getMentor()
@@ -153,6 +138,7 @@ export function renderNewStudent(student) {
 		}
 
 		detailsPanel.addEventListener("click", (e) => {
+			// document.querySelector("#add-new-participant").disabled = true;
 			let button = e.target.classList[0]
 			let groupName = e.target.parentElement.parentElement.className
 			let group = e.target.parentElement.parentElement
@@ -269,19 +255,13 @@ export function renderNewStudent(student) {
 				removeSidePanel()
 			} else if(Array.from(e.target.classList).includes("btn-danger")){
 				removeSidePanel()
+				document.querySelector("#add-new-participant").disabled = false;
 			}
 		})
 
-		//new stuff
-		let notesButton = document.querySelector(".notes-panel")
-		let notesPanel = renderNotesPanel()
-		let notesPreview = renderNotesPreview()
-		let addNoteButton = renderAddNoteButton()
-		let noteDetailsContainer = renderNoteDetailsContainer()
-		let detailsPanelButton = document.querySelector(".details-panel.btn")
-		let notesPanelButton = document.querySelector(".notes-panel.btn")
-
 		notesButton.addEventListener("click", (e) => {
+			detailsPanelButton.disabled = false;
+			notesButton.disabled = true;
 			sidePanel.appendChild(notesPanel)
 			notesPanel.appendChild(notesPreview)
 			detailsPanel.style.display = "none"
@@ -289,81 +269,81 @@ export function renderNewStudent(student) {
 			detailsPanelButton.classList.add("details-panel")
 			detailsPanelButton.classList.add("btn")
 			notesPanelButton.classList.add("active-panel")
-			if(student.getNotes().length){
+			notesPreview.appendChild(addNoteButton)
+			for(let i=student.getNotes().length-1; i>=0; i--){
 				let noteContainer = renderNoteContainer()
 				notesPreview.appendChild(noteContainer)
+				noteContainer.querySelector(".note-title").textContent = student.getNotes()[i].getNoteTitle()
 			}
-			notesPreview.appendChild(addNoteButton)
 
 			notesPanel.addEventListener("click", (e) => {
-				let editingNote;
 				if(Array.from(e.target.classList).includes(`${addNoteButton.classList[0]}`)){
 					notesPanel.appendChild(noteDetailsContainer)
-					// addNoteButton.style.display = "none"
-					notesPreview.removeChild(addNoteButton)
-					Array.from(document.querySelectorAll(".note-container")).map(note => {
-						note.style.display = "none"
-					})
+					addNoteButton.style.display = "none"
+					notesPreview.style.display = "none"
 					noteDetailsContainer.className = "note-details-container"
 					sidePanel.querySelector("#note-details-title").value = ""
 					sidePanel.querySelector("#note-details-content").value = ""
 				}
 				if(Array.from(e.target.classList).includes("bi-caret-right-fill")){
+					e.target.parentElement.classList.add("edit-mode")
+					console.log(e.target.parentElement)
 					let noteTitle = e.target.previousSibling.querySelector(".note-title").textContent
 					let selectedNote = student.getNotes().filter(n=> n.getNoteTitle() == noteTitle)[0]
 					notesPanel.appendChild(noteDetailsContainer)
-					noteDetailsContainer.classList.add("edit-mode")
-
-					notesPreview.removeChild(addNoteButton)
-					Array.from(document.querySelectorAll(".note-container")).map(note => {
-						note.style.display = "none"
-					})
+					addNoteButton.style.display = "none"
+					notesPreview.style.display = "none"
 					sidePanel.querySelector("#note-details-title").value = selectedNote.getNoteTitle()
 					sidePanel.querySelector("#note-details-content").value = selectedNote.getNoteDescription()
 					editingNote = selectedNote
-
 				}
 				if(Array.from(e.target.classList).includes("btn-success")){
 					let noteTitle = sidePanel.querySelector("#note-details-title").value
 					let noteContent = sidePanel.querySelector("#note-details-content").value
-					console.log(editingNote)
-
-					if(Array.from(noteDetailsContainer.classList).includes("edit-mode")){
-						console.log("edit mode")
-						console.log(editingNote)
-						editingNote.setNoteTitle(noteTitle)
-						editingNote.setNoteDescription(noteContent)
-					} else{
+					// addNoteButton.style.display = "block"
+					if(!document.querySelector(".note-container.edit-mode")){
 						student.addNote(noteTitle, noteContent)
 						sidePanel.querySelector("#note-details-title").value = ""
 						sidePanel.querySelector("#note-details-content").value = ""
 						let newNoteContainer = renderNoteContainer()
-						notesPreview.appendChild(newNoteContainer)
+						// notesPreview.appendChild(newNoteContainer)
+						notesPreview.prepend(newNoteContainer)
 						let notes = Array.from(document.querySelectorAll(".note-title"))
-						notes[notes.length -1].textContent = noteTitle
-
+						// notes[notes.length -1].textContent = noteTitle
+						notes[0].textContent = noteTitle
+					} else if(document.querySelector(".note-container.edit-mode")){
+						let match = document.querySelector(".note-container.edit-mode")
+						match.querySelector(".note-title").textContent = noteTitle
+						editingNote.setNoteTitle(noteTitle)
+						editingNote.setNoteDescription(noteContent)
+						match.className = "note-container"
 					}
-
 					notesPanel.removeChild(noteDetailsContainer)
-					notesPreview.appendChild(addNoteButton)
-					Array.from(document.querySelectorAll(".note-container")).map(note => {
-						note.style.display = "flex"
-					})
+					notesPreview.removeChild(addNoteButton)
+					notesPreview.prepend(addNoteButton)
+					addNoteButton.style.display = "block"
+					notesPreview.style.display = "block"
 				}
-
-				console.log(editingNote)
-
-
-
+				if(Array.from(e.target.classList).includes("btn-danger")){
+					notesPanel.removeChild(noteDetailsContainer)
+					addNoteButton.style.display = "block"
+					notesPreview.style.display = "block"
+					Array.from(document.querySelectorAll(".note-container")).map(n => n.className = "note-container")
+				}
 			})
-
-
-
-
-
-
-
-
+		})
+		detailsPanelButton.addEventListener("click", (e) => {
+			detailsPanelButton.disabled = true;
+			notesButton.disabled = false;
+			sidePanel.removeChild(notesPanel)
+			detailsPanel.style.display = "block"
+			notesPanelButton.className = ""
+			notesPanelButton.classList.add("notes-panel")
+			notesPanelButton.classList.add("btn")
+			detailsPanelButton.classList.add("active-panel")
+			for(let i=0; i<=notesPreview.childElementCount; i++){
+				notesPreview.lastChild.remove()
+			}
 
 		})
 

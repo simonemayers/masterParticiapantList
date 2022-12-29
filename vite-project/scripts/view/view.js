@@ -3,9 +3,6 @@ import { Student } from "../model/Student.js"
 import { renderNewStudent } from "./student-controller.js";
 import { getAllFilters } from "./filters.js";
 import { showCheckboxes } from "../controller/checkboxes.js";
-import { addStudentAbsense } from "../controller/student-actions/add-absense.js";
-import { addStudentTardy } from "../controller/student-actions/add-tardy.js";
-import { addStudentNote } from "../controller/student-actions/add-note.js";
 import { toggleAll } from "../controller/toggle.js";
 import {showNewParticipantPopUp, hideNewParticipantPopUp} from "./new-participant-popup"
 import { closeSidePanel } from "../controller/side-panel/exit-button.js";
@@ -81,9 +78,9 @@ export function runApp(){
 		let newStudent = takeNewParticipantInput(students)
 		renderNewStudent(newStudent);
 		hideNewParticipantPopUp();
-		addStudentTardy(newStudent, students);
-		addStudentAbsense(newStudent, students);
-		addStudentNote(newStudent, students);
+		// addStudentTardy(newStudent, students);
+		// addStudentAbsense(newStudent, students);
+		// addStudentNote(newStudent, students);
 		toggleAll(students)
 	});
 

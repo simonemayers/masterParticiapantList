@@ -150,7 +150,7 @@
 }
 .side-panel{
     width: 60rem;
-    /* height: 100%; */
+    height: 100%;
     position: absolute;
     top: 0vh;
     /* bottom: 0vh; */
@@ -216,7 +216,7 @@
     padding-top: 16px;
 }
 .side-panel-footer{
-    width: 90%;
+    /* width: 90%; */
     display: flex;
     margin: auto;
     justify-content: space-between;
@@ -226,5 +226,65 @@
     display: flex;
 }
 
+.student-notes-panel{
+    /* height: 100%; */
+    /* display: flex; */
+}
+.note-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 4%;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 5%;
+}
+.note-title-container{
+    display: flex;
+    align-items: center;
+    /* justify-content: space-around; */
+    width: 80%;
+}
+.note-title{
+    /* width: 100%; */
+}
+.bi-pencil-square{
+    margin-right: 4%;
+}
+.add-note-button{
+    background-color: rgb(217, 217, 217);
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    text-align: center; */
+}
+.note-details-container{
+    /* display: flex; */
 
+}
+.note-details-title-container{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5%;
+}
+.note-details-content-container{
+    display: flex;
+    flex-direction: column;
+}
 
+.note-details-container label {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.note-details-footer{
+    /* width: 100%; */
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5%;
+}
+
+.notes-panel.btn:hover, .details-panel.btn:hover {
+    background-color:white;
+}

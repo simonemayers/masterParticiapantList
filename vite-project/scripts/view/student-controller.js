@@ -1,9 +1,11 @@
-import { renderStudentCapstoneButton, renderStudentMentorButton, renderStudentElectiveButton, renderStudentTardyButton, renderStudentAbsenseButton, renderStudentNoteButton, renderStudentProbationButton, renderStudentMeetingButton } from "./student-action-buttons.js"
+import { renderStudentTardyButton, renderStudentAbsenseButton } from "./student-action-buttons.js"
 import { renderSidePanel } from "./side-panel/student-panel.js";
 
 
 import { removeSidePanel } from "../controller/side-panel/remove-side-panel.js";
 import { Student } from "../model/Student.js";
+import { renderDetailsPanel } from "./side-panel/details/student-details-panel.js";
+import { renderAddNoteButton, renderNoteContainer, renderNoteDetailsContainer, renderNotesPanel, renderNotesPreview } from "./side-panel/notes/student-notes-panel.js";
 
 
 function renderStudentRow() {
@@ -48,11 +50,11 @@ function renderStudentTardies(student) {
 // 	return notesTd;
 // }
 
-function renderStudentActions(student) {
-	let actionTd = document.createElement("td");
-	actionTd.classList.add("actions");
-	return actionTd;
-}
+// function renderStudentActions(student) {
+// 	let actionTd = document.createElement("td");
+// 	actionTd.classList.add("actions");
+// 	return actionTd;
+// }
 
 
 
@@ -64,17 +66,15 @@ export function renderNewStudent(student) {
 	let absensesTd = renderStudentAbsenses(student);
 	let tardiesTd = renderStudentTardies(student);
 	// let notesTd = renderStudentNotes(student);
-	let actionTd = renderStudentActions(student);
-
-	let mentorButton = renderStudentMentorButton(student);
-	let capstoneButton = renderStudentCapstoneButton(student)
-	let electiveButton = renderStudentElectiveButton(student)
-	let tardyButton = renderStudentTardyButton(student)
-	let absenseButton = renderStudentAbsenseButton(student)
-	let noteButton = renderStudentNoteButton(student)
-	let probationButton = renderStudentProbationButton(student)
-	let meetingButton = renderStudentMeetingButton(student)
-
+	// let actionTd = renderStudentActions(student);
+	// let mentorButton = renderStudentMentorButton(student);
+	// let capstoneButton = renderStudentCapstoneButton(student)
+	// let electiveButton = renderStudentElectiveButton(student)
+	// let tardyButton = renderStudentTardyButton(student)
+	// let absenseButton = renderStudentAbsenseButton(student)
+	// let noteButton = renderStudentNoteButton(student)
+	// let probationButton = renderStudentProbationButton(student)
+	// let meetingButton = renderStudentMeetingButton(student)
 
 	newRow.id = `student${idTd.textContent}`;
 	newRow.appendChild(idTd);
@@ -82,15 +82,16 @@ export function renderNewStudent(student) {
 	newRow.appendChild(absensesTd);
 	newRow.appendChild(tardiesTd);
 	// newRow.appendChild(notesTd);
-	newRow.appendChild(actionTd);
-	actionTd.appendChild(mentorButton);
-	actionTd.appendChild(capstoneButton)
-	actionTd.appendChild(electiveButton)
-	actionTd.appendChild(tardyButton)
-	actionTd.appendChild(absenseButton)
-	actionTd.appendChild(noteButton)
-	actionTd.appendChild(meetingButton)
-	actionTd.appendChild(probationButton)
+	// newRow.appendChild(actionTd);
+	// actionTd.appendChild(mentorButton);
+	// actionTd.appendChild(capstoneButton)
+	// actionTd.appendChild(electiveButton)
+	// actionTd.appendChild(tardyButton)
+	// actionTd.appendChild(absenseButton)
+	// actionTd.appendChild(noteButton)
+	// actionTd.appendChild(meetingButton)
+	// actionTd.appendChild(probationButton)
+	// return newRow
 
 	function enableInput(e, input){
 		e.target.parentElement.parentElement.querySelector(`${input}`).disabled = false
@@ -117,6 +118,9 @@ export function renderNewStudent(student) {
 
 	newRow.addEventListener("click", (e) => {
 		let sidePanel = renderSidePanel()
+
+		let detailsPanel = renderDetailsPanel()
+		sidePanel.appendChild(detailsPanel)
 		showUsernameOnForm(sidePanel)
 		showStudentIdOnForm(sidePanel)
 		showFirstNameOnForm(sidePanel)
@@ -148,7 +152,7 @@ export function renderNewStudent(student) {
 			document.querySelector(".edit-elective-group").style.display = "none"
 		}
 
-		sidePanel.addEventListener("click", (e) => {
+		detailsPanel.addEventListener("click", (e) => {
 			let button = e.target.classList[0]
 			let groupName = e.target.parentElement.parentElement.className
 			let group = e.target.parentElement.parentElement
@@ -242,8 +246,6 @@ export function renderNewStudent(student) {
 				let capstoneStructure = sidePanel.querySelector("#type")[sidePanel.querySelector("#type").selectedIndex].value
 				let elective = sidePanel.querySelector("#elective")[sidePanel.querySelector("#elective").selectedIndex].value
 
-				student.setFirstName(firstName)
-				student.setLastName(lastName)
 				student.setIsOnProbation(probationStatus)
 				student.setHasMetWithStaff(hasMetWithStaff)
 				if(mentorName !== ""){
@@ -255,10 +257,116 @@ export function renderNewStudent(student) {
 				if(Array.from(document.querySelector(".elective-group button").classList).includes("cancel-btn")){
 					student.addElective(elective)
 				}
+				if(!document.querySelector("#first-name").disabled){
+					student.setFirstName(firstName)
+					student.setLastName(lastName)
+					let match = Array.from(document.querySelectorAll(".participant-list tr")).filter(s => parseInt(s.id.slice(-1)) == student.getId())
+					match[0].querySelector(".name").textContent = student.getFullName()
+				}
+				// if(Array.from(document.querySelector(".notes-panel.btn").classList).includes("active-panel")){
+				// 	student.addNote(noteTitle, noteContent)
+				// }
 				removeSidePanel()
 			} else if(Array.from(e.target.classList).includes("btn-danger")){
 				removeSidePanel()
 			}
 		})
+
+		//new stuff
+		let notesButton = document.querySelector(".notes-panel")
+		let notesPanel = renderNotesPanel()
+		let notesPreview = renderNotesPreview()
+		let addNoteButton = renderAddNoteButton()
+		let noteDetailsContainer = renderNoteDetailsContainer()
+		let detailsPanelButton = document.querySelector(".details-panel.btn")
+		let notesPanelButton = document.querySelector(".notes-panel.btn")
+
+		notesButton.addEventListener("click", (e) => {
+			sidePanel.appendChild(notesPanel)
+			notesPanel.appendChild(notesPreview)
+			detailsPanel.style.display = "none"
+			detailsPanelButton.className = ""
+			detailsPanelButton.classList.add("details-panel")
+			detailsPanelButton.classList.add("btn")
+			notesPanelButton.classList.add("active-panel")
+			if(student.getNotes().length){
+				let noteContainer = renderNoteContainer()
+				notesPreview.appendChild(noteContainer)
+			}
+			notesPreview.appendChild(addNoteButton)
+
+			notesPanel.addEventListener("click", (e) => {
+				let editingNote;
+				if(Array.from(e.target.classList).includes(`${addNoteButton.classList[0]}`)){
+					notesPanel.appendChild(noteDetailsContainer)
+					// addNoteButton.style.display = "none"
+					notesPreview.removeChild(addNoteButton)
+					Array.from(document.querySelectorAll(".note-container")).map(note => {
+						note.style.display = "none"
+					})
+					noteDetailsContainer.className = "note-details-container"
+					sidePanel.querySelector("#note-details-title").value = ""
+					sidePanel.querySelector("#note-details-content").value = ""
+				}
+				if(Array.from(e.target.classList).includes("bi-caret-right-fill")){
+					let noteTitle = e.target.previousSibling.querySelector(".note-title").textContent
+					let selectedNote = student.getNotes().filter(n=> n.getNoteTitle() == noteTitle)[0]
+					notesPanel.appendChild(noteDetailsContainer)
+					noteDetailsContainer.classList.add("edit-mode")
+
+					notesPreview.removeChild(addNoteButton)
+					Array.from(document.querySelectorAll(".note-container")).map(note => {
+						note.style.display = "none"
+					})
+					sidePanel.querySelector("#note-details-title").value = selectedNote.getNoteTitle()
+					sidePanel.querySelector("#note-details-content").value = selectedNote.getNoteDescription()
+					editingNote = selectedNote
+
+				}
+				if(Array.from(e.target.classList).includes("btn-success")){
+					let noteTitle = sidePanel.querySelector("#note-details-title").value
+					let noteContent = sidePanel.querySelector("#note-details-content").value
+					console.log(editingNote)
+
+					if(Array.from(noteDetailsContainer.classList).includes("edit-mode")){
+						console.log("edit mode")
+						console.log(editingNote)
+						editingNote.setNoteTitle(noteTitle)
+						editingNote.setNoteDescription(noteContent)
+					} else{
+						student.addNote(noteTitle, noteContent)
+						sidePanel.querySelector("#note-details-title").value = ""
+						sidePanel.querySelector("#note-details-content").value = ""
+						let newNoteContainer = renderNoteContainer()
+						notesPreview.appendChild(newNoteContainer)
+						let notes = Array.from(document.querySelectorAll(".note-title"))
+						notes[notes.length -1].textContent = noteTitle
+
+					}
+
+					notesPanel.removeChild(noteDetailsContainer)
+					notesPreview.appendChild(addNoteButton)
+					Array.from(document.querySelectorAll(".note-container")).map(note => {
+						note.style.display = "flex"
+					})
+				}
+
+				console.log(editingNote)
+
+
+
+			})
+
+
+
+
+
+
+
+
+
+		})
+
+
 	})
 }

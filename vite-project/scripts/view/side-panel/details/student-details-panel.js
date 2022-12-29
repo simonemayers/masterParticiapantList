@@ -41,5 +41,8 @@ export function renderDetailsPanel(){
     detailsPanel.appendChild(capstoneGroup)
     let electiveGroup = renderElectiveGroup()
     detailsPanel.appendChild(electiveGroup)
+    let footer = renderDetailsFooter()
+    detailsPanel.appendChild(footer)
     return detailsPanel;
 }
+

@@ -4,4 +4,16 @@ export class Note {
 		this.description = description;
 		this.student = student.userName;
 	}
+	getNoteTitle(){
+		return this.title
+	}
+	setNoteTitle(title){
+		this.title = title
+	}
+	getNoteDescription(){
+		return this.description
+	}
+	setNoteDescription(description){
+		this.description = description
+	}
 }

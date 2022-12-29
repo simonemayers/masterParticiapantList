@@ -35,13 +35,14 @@ function renderPanelButtons(){
 
 // add a conditional here to choose between details and notes
 export function renderSidePanel(){
-    let detailsPanel = renderDetailsPanel()
+    // let detailsPanel = renderDetailsPanel()
     let panels = renderPanelButtons()
     let sidePanelContainer = renderSidePanelContainer()
     sidePanelContainer.appendChild(panels)
-    sidePanelContainer.appendChild(detailsPanel)
-    let footer = renderDetailsFooter()
-    sidePanelContainer.appendChild(footer)
+    // sidePanelContainer.appendChild(detailsPanel)
+    // let footer = renderDetailsFooter()
+    // sidePanelContainer.appendChild(footer)
     let sidePanel = sidePanelContainer.parentElement
-    return sidePanel
+    // return sidePanel
+    return sidePanelContainer
 }
